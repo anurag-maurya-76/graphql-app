@@ -1,15 +1,19 @@
 import "./App.css";
 import { ApolloProvider } from "@apollo/client";
 import Pincode from "./Pincode/Pincode";
-import { pincodeClient } from "./ApolloClient/client";
+import { mdmClient, pincodeClient } from "./ApolloClient/client";
+import { DocData } from "./DocData/DocData";
 
 function App() {
   return (
-    <ApolloProvider client={pincodeClient}>
-      <div className="App">
+    <div className="App">
+      <ApolloProvider client={pincodeClient}>
         <Pincode />
-      </div>
-    </ApolloProvider>
+      </ApolloProvider>
+      <ApolloProvider client={mdmClient}>
+        <DocData />
+      </ApolloProvider>
+    </div>
   );
 }
 

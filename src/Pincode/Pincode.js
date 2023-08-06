@@ -1,6 +1,6 @@
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { useLazyQuery } from "@apollo/client";
-import { PincodeManagementGQL } from "../Constants/PincodeManagementGQL";
+import { PincodeGQL } from "../Constants/Pincode";
 import CustomMultiDropDown from "../Component/CustomMultiDropDown";
 import {
   fetchDistrict,
@@ -27,13 +27,17 @@ function Pincode() {
   const [villageData, setVillageData] = useState();
   const [postOfficeData, setpostOfficeData] = useState();
   const [getPincodeDetails, { loading, error }] = useLazyQuery(
-    PincodeManagementGQL.GET_PINCODE_DETAILS
+    PincodeGQL.GET_PINCODE_DETAILS
   );
   const [pincodeDetailsLoaded, setPincodeDetailsLoaded] = useState(false);
   const [pincodeState, pincodeDispatch] = useReducer(
     PincodeReducer,
     defaultState
   );
+
+  useEffect(() => {
+    console.log(pincodeState);
+  }, [pincodeState]);
 
   const fetchPincodeData = async (pincode) => {
     setPincodeDetailsLoaded(false);
@@ -42,11 +46,15 @@ function Pincode() {
         variables: { pincode },
       });
       if (!loading && !error) {
-        pincodeDispatch(defaultState, {
-          action: RESET_PINCODE_DETAILS,
+        pincodeDispatch({
+          type: RESET_PINCODE_DETAILS,
           payload: null,
         });
         setStateData(fetchState(response.data?.pincodeDetails.stateInfo));
+        setDistrictData();
+        setSubDistrictData();
+        setVillageData();
+        setpostOfficeData();
         setPincodeDetailsLoaded(true);
       }
     }
@@ -73,8 +81,8 @@ function Pincode() {
             getOptionLabel={(e) => e?.value}
             getOptionValue={(e) => e?.value}
             onChange={(e) => {
-              pincodeDispatch(defaultState, {
-                action: UPDATE_SELECTED_STATE,
+              pincodeDispatch({
+                type: UPDATE_SELECTED_STATE,
                 payload: e.value,
               });
               setDistrictData(fetchDistrict(stateData?.stateInfo, e.value));
@@ -89,8 +97,8 @@ function Pincode() {
             getOptionValue={(e) => e?.value}
             getOptionLabel={(e) => e?.value}
             onChange={(e) => {
-              pincodeDispatch(defaultState, {
-                action: UPDATE_SELECTED_DISTRICT,
+              pincodeDispatch({
+                type: UPDATE_SELECTED_DISTRICT,
                 payload: e.value,
               });
               setSubDistrictData(
@@ -107,8 +115,8 @@ function Pincode() {
             getOptionLabel={(e) => e?.value}
             getOptionValue={(e) => e?.value}
             onChange={(e) => {
-              pincodeDispatch(defaultState, {
-                action: UPDATE_SELECTED_SUBDISTRICT,
+              pincodeDispatch({
+                type: UPDATE_SELECTED_SUBDISTRICT,
                 payload: e.value,
               });
               setVillageData(
@@ -125,8 +133,8 @@ function Pincode() {
             options={villageData?.villageList}
             getOptionValue={(e) => e?.value}
             onChange={(e) => {
-              pincodeDispatch(defaultState, {
-                action: UPDATE_SELECTED_VILLAGE,
+              pincodeDispatch({
+                type: UPDATE_SELECTED_VILLAGE,
                 payload: e.value,
               });
               setpostOfficeData(
@@ -143,8 +151,8 @@ function Pincode() {
             getOptionLabel={(e) => e?.value}
             getOptionValue={(e) => e?.value}
             onChange={(e) => {
-              pincodeDispatch(defaultState, {
-                action: UPDATE_SELECTED_POSTOFFICE,
+              pincodeDispatch({
+                type: UPDATE_SELECTED_POSTOFFICE,
                 payload: e.value,
               });
             }}

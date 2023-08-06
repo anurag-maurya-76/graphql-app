@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const PincodeManagementGQL = {
+export const PincodeGQL = {
   GET_ALL_STATE: gql`
     query getAllState($pincode: String) {
       pincodeDetails(pincode: $pincode) {
