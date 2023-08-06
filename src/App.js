@@ -1,13 +1,13 @@
 import "./App.css";
 import { ApolloProvider } from "@apollo/client";
-import ExchangeRatePage from "./ExchangeRatePage";
-import { client } from "./ApolloClient/client";
+import Pincode from "./Pincode/Pincode";
+import { pincodeClient } from "./ApolloClient/client";
 
 function App() {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={pincodeClient}>
       <div className="App">
-        <ExchangeRatePage />
+        <Pincode />
       </div>
     </ApolloProvider>
   );

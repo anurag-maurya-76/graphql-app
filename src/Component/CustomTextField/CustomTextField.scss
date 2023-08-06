@@ -1,0 +1,50 @@
+.doc-custom-textfield {
+  all: unset;
+  display: inline-block;
+  width: 100%;
+
+  &__label {
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+    padding-bottom: 4px;
+    &_required {
+      color: #8a0505;
+      font-size: 16px;
+      font-weight: bolder;
+    }
+  }
+
+  &__textfield {
+    all: unset;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    border-bottom: rgb(204, 204, 204) solid 1px;
+    width: 100%;
+    font-size: 17px;
+    color: #0b3b53;
+    background: none;
+    &:disabled {
+      color: rgb(84, 84, 84);
+      background: rgba(239, 239, 239, 0.3);
+    }
+    &:focus {
+      outline: 0;
+      border-bottom: 1px solid #137eb2;
+    }
+  }
+
+  &__error {
+    all: unset;
+    border-bottom: 1px solid #8a0505;
+    width: 80%;
+    font-size: 17px;
+    color: #0b3b53;
+
+    &:focus {
+      all: unset;
+      // border-bottom: 2px solid #0a161d;
+    }
+  }
+}

@@ -1,10 +1,14 @@
-import { ApolloClient, ApolloLink, InMemoryCache } from "@apollo/client";
-import { RestLink } from "apollo-link-rest";
+import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 
-const restLink = new RestLink({
-  endpoints: "https://myaadhaarstage.uidai.gov.in/masterDataManagement/graphql",
-});
-export const client = new ApolloClient({
+export const mdmClient = new ApolloClient({
   cache: new InMemoryCache(),
-  link: ApolloLink.from([restLink]),
+  link: new HttpLink({
+    uri: `https://myaadhaarstage.uidai.gov.in/masterDataManagement/graphql`,
+  }),
+});
+export const pincodeClient = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: `https://myaadhaarstage.uidai.gov.in/pincode/graphql`,
+  }),
 });

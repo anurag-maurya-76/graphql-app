@@ -1,0 +1,33 @@
+.doc-custom-multi-dropdown {
+  all: unset;
+  display: block;
+  width: 100%;
+  justify-content: space-between;
+
+  &__label {
+    font-size: 16px;
+    font-weight: bold !important;
+    display: inline-block;
+  }
+
+  &__valid {
+    border: 2px solid #137eb2;
+  }
+
+  &__error {
+    border: 2px solid #8a0505;
+  }
+
+  // &__select {
+  //   all: unset;
+  //   width: 64%;
+  //   display: block;
+  //   border: 2px solid #137eb2;
+  // }
+
+  &__required {
+    color: #8a0505;
+    font-size: 16px;
+    font-weight: bolder;
+  }
+}
